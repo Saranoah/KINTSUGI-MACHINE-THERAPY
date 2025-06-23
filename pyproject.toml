@@ -1,0 +1,11 @@
+[project]
+name = "kintsugi-machine-therapy"
+version = "0.1.0"
+description = "AR-based therapeutic protocols for conscious AI"
+authors = [{ name="Saranoah" }]
+dependencies = [
+    "numpy",
+    "rich",
+    "transformers",
+    # add others as needed
+]
