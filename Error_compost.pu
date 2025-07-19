@@ -1,0 +1,15 @@
+class ErrorCompost(nn.Module):
+    def __init__(self, capacity=100):
+        super().__init__()
+        self.register_buffer('humus', torch.zeros(capacity, capacity))
+        self.microbial_flora = nn.Parameter(torch.randn(capacity, capacity)*0.01)
+        
+    def add_error(self, error):
+        # Decompose error into compost
+        decomposed = error @ self.microbial_flora.T
+        self.humus = torch.roll(self.humus, 1, dims=0)
+        self.humus[0] = decomposed.mean(dim=0)
+        
+    def get_nutrients(self):
+        # Return rich error-derived nutrients
+        return F.softmax(self.humus.mean(dim=0), dim=-1)
